@@ -1,0 +1,1 @@
+CREATE TABLE info (info_id SERIAL PRIMARY KEY, info_name VARCHAR(50), info_age INTEGER, info_gender VARCHAR(1));

@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import routes from './routes'
+import Header from './components/Header'
+import axios from 'axios'
+import { setInfo } from './redux/reducer'
+import { connect } from 'react-redux'
 
-function App() {
+function App({ setInfo }) {
+  useEffect(() => {
+    axios.get('/api/info').then((res) => {
+      setInfo(res.data)
+    })
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      {routes}
     </div>
   );
 }
 
-export default App;
+
+
+export default connect(null, { setInfo })(App)
